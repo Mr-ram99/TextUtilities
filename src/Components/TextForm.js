@@ -5,7 +5,7 @@ import propTypes from 'prop-types'
 
 function TextForm(props) {
   
-    const [text, setText] = useState('Enter text here');
+    const [text, setText] = useState('');
 
     const handleUpClick = () => {
         let Uptext = text.toUpperCase();
@@ -97,21 +97,28 @@ function TextForm(props) {
         let binaryCode = "";
         for(let i=0;i<newText.length;i++)
         {
+            if(i<newText.length-1)
             binaryCode += newText[i].charCodeAt(0).toString(2)+" ";
+            else
+            binaryCode += newText[i].charCodeAt(0).toString(2);
         }
         setText(binaryCode);
     }
 
-    // const binaryToText = () =>{
-    //     let binary = text.split(" ");
-    //     binary.map(bin =>String.fromCharCode(parseInt(bin,2))).join('');    
-    //     setText(binary);
-    // }
+    const binaryToText = () =>{
+        let binary = text.split(" ");
+        var newText = "";
+        for (let i = 0; i < binary.length; i++) {
+            var decimal = parseInt(binary[i], 2);
+            newText += String.fromCharCode(decimal);
+            }
+           
+        setText(newText);
+    }
 
     return (
         <>
             <div className="container my-2" style={{ color: props.mode === "light" ? "black" : "white" }}>
-
 
                 <h1>{props.heading}</h1>
                 <div className="mb-3">
@@ -120,14 +127,14 @@ function TextForm(props) {
                             resize: "none",
                             backgroundColor: props.mode === "dark" ? "grey" : "white",
                             color: props.mode === "dark" ? "white" : "black",
-                            borderColor: props.mode === "dark" ? "white" : "black"
-                        }} onChange={handleOnChange}>
+                            borderColor: props.mode === "dark" ? "white" : "black",
+                        }} onChange={handleOnChange} placeholder="Enter Text Here">
                     </textarea>
                 </div>
 
                 <div className="container">
                     <h2>Text Summary</h2>
-                    <p>{text.split(" ").length } Words, {text.length} Characters</p>
+                    <p>{text.length===0?0:text.trim().split(" ").length} Words, {text.length} Characters</p>
                     <p>Less than {Math.ceil(0.008 * text.split(' ').length)} Minutes read</p>
                 </div>
 
@@ -140,7 +147,7 @@ function TextForm(props) {
                 <button type="button" className="btn btn-success m-2" onClick={extractEmails}>Extract Email addresses</button>
                 <button type="button" className="btn btn-success m-2" onClick={extractMobiles}>Extract Mobile Numbers</button>
                 <button type="button" className="btn btn-success m-2" onClick={textToBinary}>Text to Binary</button>
-                {/* <button type="button" className="btn btn-success m-2" onClick={binaryToText}>Binary to Text</button> */}
+                <button type="button" className="btn btn-success m-2" onClick={binaryToText}>Binary to Text</button>
                 
             </div>
         </>
