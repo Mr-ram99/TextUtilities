@@ -148,7 +148,6 @@ function TextForm(props) {
                 <button type="button" className="btn btn-success m-2" onClick={extractMobiles}>Extract Mobile Numbers</button>
                 <button type="button" className="btn btn-success m-2" onClick={textToBinary}>Text to Binary</button>
                 <button type="button" className="btn btn-success m-2" onClick={binaryToText}>Binary to Text</button>
-                
             </div>
         </>
     )
