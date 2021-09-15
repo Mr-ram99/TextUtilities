@@ -1,7 +1,7 @@
 
 # Text Utils - A text utility webapp
 
-Text utils is a web app which provides utilities to modify and convert text according to your requirement.
+[Text-utils](https://text-utils-jr.netlify.app/) is a web app which provides utilities to modify and convert text according to your requirement.
 ## Features
 
 - Light/dark mode toggle
@@ -18,9 +18,9 @@ Text utils is a web app which provides utilities to modify and convert text acco
   
 ## Screenshots
 ### Light Mode
-![Light Mode](\src\Screenshots\LightMode.png)
+![Light Mode](src/Screenshots/LightMode.PNG)
 ### Dark Mode
-![Dark Mode](\src\Screenshots\DarkMode.png)
+![Dark Mode](src/Screenshots/DarkMode.PNG)
   
 ## Authors
 
