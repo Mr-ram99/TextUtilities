@@ -3,7 +3,7 @@ import Alert from './Components/Alert';
 import TextForm from './Components/TextForm';
 import About from './Components/About';
 import React, {useState} from 'react';
-import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -36,7 +36,7 @@ function App() {
   }
   return (
     <Router>
-    <Navbar title="TextUtilities" about="About Us" mode={mode} toggleMode={toggleMode}/>
+    <Navbar title="TextUtilities" mode={mode} toggleMode={toggleMode}/>
     <Alert alert={alert}/>
     <Switch>
           <Route exact path="/about">

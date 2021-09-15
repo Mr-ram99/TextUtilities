@@ -4,9 +4,7 @@ import propTypes from 'prop-types'
 
 
 function TextForm(props) {
-  
     const [text, setText] = useState('');
-
     const handleUpClick = () => {
         let Uptext = text.toUpperCase();
         setText(Uptext);
@@ -25,8 +23,7 @@ function TextForm(props) {
     }
     const handleCopy = () => {
         let copyText = document.getElementById("mybox");
-        // copyText.select();
-        copyText.setSelectionRange(0, 99999); 
+        copyText.setSelectionRange(0, 99999);
         navigator.clipboard.writeText(copyText.value);
         props.showAlert("Copied to clipboard!!", "success");
     }
@@ -43,15 +40,13 @@ function TextForm(props) {
                 emails.push(textArr[i]);
             }
         }
-        if (emails.length === 0)
-            {
-                props.showAlert("No emails found!!", "warning");
-            }
-        else
-            {
-                setText(emails.join('\n'));
-                props.showAlert("Emails extracted!!", "success")
-            }
+        if (emails.length === 0) {
+            props.showAlert("No emails found!!", "warning");
+        }
+        else {
+            setText(emails.join('\n'));
+            props.showAlert("Emails extracted!!", "success")
+        }
     }
 
     const extractMobiles = () => {
@@ -62,19 +57,17 @@ function TextForm(props) {
                 mobiles.push(textArr[i]);
             }
         }
-        if (mobiles.length === 0)
-            {
-                props.showAlert("No Mobile number found!!", "warning");
-            }
-        else
-           {
-                setText(mobiles.join('\n'));
-                props.showAlert("Mobile extracted!!", "success");
-            }
+        if (mobiles.length === 0) {
+            props.showAlert("No Mobile number found!!", "warning");
+        }
+        else {
+            setText(mobiles.join('\n'));
+            props.showAlert("Mobile extracted!!", "success");
+        }
     }
 
 
-    const handleOnChange = (event) => {
+     const handleOnChange = (event) => {
         setText(event.target.value);
     }
 
@@ -82,42 +75,43 @@ function TextForm(props) {
         const pattern = prompt("Enter Pattern:(Note: If found, displayed in uppercase)");
         let result = text.split(pattern);
         let foundText = pattern.toUpperCase();
-        if(result.length>1)
-        {
+        if (result.length > 1) {
             setText(result.join(foundText));
         }
-        else
-        {
+        else {
             props.showAlert("No match found!!", "warning");
         }
     }
 
-    const textToBinary = () =>{
+    const textToBinary = () => {
         let newText = text.split('');
         let binaryCode = "";
-        for(let i=0;i<newText.length;i++)
-        {
-            if(i<newText.length-1)
-            binaryCode += newText[i].charCodeAt(0).toString(2)+" ";
+        for (let i = 0; i < newText.length; i++) {
+            if (i < newText.length - 1)
+                binaryCode += newText[i].charCodeAt(0).toString(2) + " ";
             else
-            binaryCode += newText[i].charCodeAt(0).toString(2);
+                binaryCode += newText[i].charCodeAt(0).toString(2);
         }
         setText(binaryCode);
+        props.showAlert("Text changed to binary code!!", "success");
+
     }
 
-    const binaryToText = () =>{
+    const binaryToText = () => {
         let binary = text.split(" ");
         var newText = "";
         for (let i = 0; i < binary.length; i++) {
             var decimal = parseInt(binary[i], 2);
             newText += String.fromCharCode(decimal);
-            }
-           
+        }
+
         setText(newText);
+        props.showAlert("Binary Code changed to text!!", "success");
+
     }
 
     return (
-        <>
+        
             <div className="container my-2" style={{ color: props.mode === "light" ? "black" : "white" }}>
 
                 <h1>{props.heading}</h1>
@@ -127,29 +121,29 @@ function TextForm(props) {
                             resize: "none",
                             backgroundColor: props.mode === "dark" ? "grey" : "white",
                             color: props.mode === "dark" ? "white" : "black",
-                            borderColor: props.mode === "dark" ? "white" : "black",
+                            borderColor: props.mode === "dark" ? "white" : "black"
                         }} onChange={handleOnChange} placeholder="Enter Text Here">
                     </textarea>
                 </div>
 
                 <div className="container">
                     <h2>Text Summary</h2>
-                    <p>{text.length===0?0:text.trim().split(" ").length} Words, {text.length} Characters</p>
+                    <p>{text.length === 0 ? 0 : text.trim().split(/\s+/).length} Words, {text.length} Characters</p>
                     <p>Less than {Math.ceil(0.008 * text.split(' ').length)} Minutes read</p>
                 </div>
 
-                <button type="button" className="btn btn-success m-2 " onClick={handleUpClick}>Convert to Uppercase</button>
-                <button type="button" className="btn btn-success m-2" onClick={handleClearClick}>Clear Text</button>
-                <button type="button" className="btn btn-success m-2" onClick={handleLowClick}>Convert to Lowercase</button>
-                <button type="button" className="btn btn-success m-2" onClick={handleCopy}>Copy Text</button>
-                <button type="button" className="btn btn-success m-2" onClick={handleReverseClick}>Reverse the Text</button>
-                <button type="button" className="btn btn-success m-2" onClick={patternFinder}>Find Pattern</button>
-                <button type="button" className="btn btn-success m-2" onClick={extractEmails}>Extract Email addresses</button>
-                <button type="button" className="btn btn-success m-2" onClick={extractMobiles}>Extract Mobile Numbers</button>
-                <button type="button" className="btn btn-success m-2" onClick={textToBinary}>Text to Binary</button>
-                <button type="button" className="btn btn-success m-2" onClick={binaryToText}>Binary to Text</button>
+                <button type="button" className="btn btn-success m-2" onClick={handleUpClick} disabled={text.length===0}>Convert to Uppercase</button>
+                <button type="button" className="btn btn-success m-2" onClick={handleClearClick} disabled={text.length===0}>Clear Text</button>
+                <button type="button" className="btn btn-success m-2" onClick={handleLowClick} disabled={text.length===0}>Convert to Lowercase</button>
+                <button type="button" className="btn btn-success m-2" onClick={handleCopy} disabled={text.length===0}>Copy Text</button>
+                <button type="button" className="btn btn-success m-2" onClick={handleReverseClick} disabled={text.length===0}>Reverse the Text</button>
+                <button type="button" className="btn btn-success m-2" onClick={patternFinder} disabled={text.length===0}>Find Pattern</button>
+                <button type="button" className="btn btn-success m-2" onClick={extractEmails} disabled={text.length===0}>Extract Email addresses</button>
+                <button type="button" className="btn btn-success m-2" onClick={extractMobiles} disabled={text.length===0}>Extract Mobile Numbers</button>
+                <button type="button" className="btn btn-success m-2" onClick={textToBinary} disabled={text.length===0}>Text to Binary</button>
+                <button type="button" className="btn btn-success m-2" onClick={binaryToText} disabled={text.length===0}>Binary to Text</button>
             </div>
-        </>
+            
     )
 }
 
